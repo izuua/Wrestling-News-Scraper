@@ -29,6 +29,8 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/lopdb";
 
+mongoose.connect(MONGODB_URI);
+
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
