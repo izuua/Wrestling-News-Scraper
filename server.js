@@ -45,7 +45,7 @@ app.get("/scrape", function(req, res) {
             results.title = title;
             results.link = link;
 
-            db.Article.create(result).then(function(dbArticle) {
+            db.Article.create(results).then(function(dbArticle) {
                 console.log(dbArticle);
             }).catch(function(err) {
                 console.log(err);
