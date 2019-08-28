@@ -21,3 +21,7 @@ $(document).on("click", "#news-load", () => {
         $("#wrapper").show();
     })
 });
+
+$(document).on("click", "#news-delete", () => {
+    console.log("Delete clicked")
+})
