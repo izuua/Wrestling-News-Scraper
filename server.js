@@ -42,14 +42,21 @@ app.get("/scrape", function(req, res) {
             var title = $(element).children().text();
             var link = $(element).find("a").attr("href");
     
-            results.title = title;
-            results.link = link;
+            axios.get(link).then(function(response) {
+                var $ = cheerio.load(response.data);
+                var image = $("#main").find("img").attr("src");
 
-            db.Article.create(results).then(function(dbArticle) {
-                console.log(dbArticle);
-            }).catch(function(err) {
-                console.log(err);
+                results.title = title;
+                results.link = link;
+                results.image = image;
+
+                db.Article.create(results).then(function(dbArticle) {
+                    console.log(dbArticle);
+                }).catch(function(err) {
+                    console.log(err);
+                })
             })
+
         })
         res.send("Scrape complete");
     })
