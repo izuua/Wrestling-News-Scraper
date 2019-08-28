@@ -1,5 +1,9 @@
 console.log("app.js loaded");
 
 $(document).on("click", "#news-load", () => {
-    console.log("button clicked");
+    $.getJSON("/articles", function(data) {
+        data.forEach(function(element) {
+            $("#wrapper").append(`<a href = "${element.link}"><p data-id="${element._id}"> ${element.title} <br /></p></a>`)
+        })
+    })
 });
