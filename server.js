@@ -32,7 +32,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/lopdb";
 mongoose.connect(MONGODB_URI);
 
 app.get("/scrape", function(req, res) {
-    db.Article.deleteMany({});
+    db.Article.deleteMany({}, function(err, response){});
 
     axios.get("https://lordsofpain.net/").then(function(response) {
 
