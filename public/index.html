@@ -15,29 +15,27 @@
 </head>
 
 <body>
-    <div class="jumbotron text-center">
-        <div class="overlay">
-        </div>
-        <div class="background-image">
-        </div>
-        <div class="caption">
-            <h1>Mongo Scraper</h1>
-            <p>Wrestling News</p>
-            <button type="button" id="news-load">Click to load stories</button>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Wrestling News</h1>
+            <hr>
+            <div class="text-center">
+                <button class="btn btn-lg btn-default" id="news-load">Click to load stories
+                    <span class="fa fa-home"></span>
+                </button>
+            </div>
         </div>
     </div>
 
-
-    <div id="wrapper">
+    <div id="wrapper" class="container">
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <div class="card-header">Featured News</div>
-                <div class="card-body" id="card-news"></div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Featured News</div>
+                    <div class="card-body" id="card-news"></div>
+                </div>
             </div>
-            <div class="col-2"></div>
         </div>
-
     </div>
 
 </body>
