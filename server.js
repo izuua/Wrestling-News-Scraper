@@ -31,25 +31,37 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/lopdb";
 
 mongoose.connect(MONGODB_URI);
 
-axios.get("https://lordsofpain.net/").then(function(response) {
+app.get("/scrape", function(req, res) {
+    axios.get("https://lordsofpain.net/").then(function(response) {
 
-    var $ = cheerio.load(response.data);
+        var $ = cheerio.load(response.data);
+    
+        var results = {};
+    
+        $("h4").each(function(i, element) {
+            var title = $(element).children().text();
+            var link = $(element).find("a").attr("href");
+    
+            results.title = title;
+            results.link = link;
 
-    var results = [];
-
-    $("h4").each(function(i, element) {
-        var title = $(element).children().text();
-        var link = $(element).find("a").attr("href");
-
-        results.push({
-            title: title,
-            link: link
+            db.Article.create(result).then(function(dbArticle) {
+                console.log(dbArticle);
+            }).catch(function(err) {
+                console.log(err);
+            })
         })
+        res.send("Scrape complete");
     })
-
-    console.log(results);
 })
 
+app.get("/articles", function(req, res) {
+    db.Article.find({}).then(function(dbArticle) {
+        res.json(dbArticle);
+    }).catch(function(err) {
+        res.json(err);
+    })
+})
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
